@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Strength Checker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header>
+    <h1>Password Strength Checker</h1>
+    <p class="subtitle">A Basic Password Security Analysis Tool</p>
+  </header>
+
+  <main>
+
+    <!-- ===== Password input section ===== -->
+    <section class="card">
+      <h2>Enter a Password</h2>
+
+      <div class="input-row">
+        <!-- type="password" hides the characters; autocomplete off so the browser does not save it -->
+        <input type="password" id="passwordInput" placeholder="Type your password here"
+               autocomplete="off" spellcheck="false">
+        <button type="button" id="toggleBtn" class="btn secondary">Show</button>
+      </div>
+
+      <div class="button-row">
+        <button type="button" id="analyseBtn" class="btn primary">Analyse Password</button>
+        <button type="button" id="resetBtn" class="btn secondary">Reset</button>
+      </div>
+
+      <p class="privacy-note">
+        &#128274; Your password is analysed locally in your browser and is not uploaded to any server.
+      </p>
+
+      <!-- Message shown when the input is empty -->
+      <p id="emptyMessage" class="error-message" hidden>Please enter a password first.</p>
+    </section>
+
+    <!-- ===== Results (hidden until the user clicks Analyse) ===== -->
+    <section id="results" hidden>
+
+      <!-- Warning for common passwords -->
+      <div id="commonWarning" class="warning-box" hidden>
+        &#9888; Warning: This password is very commonly used. Attackers try these first. Do not use it!
+      </div>
+
+      <!-- Strength bar -->
+      <div class="card">
+        <h2>Password Strength</h2>
+        <div class="bar-background">
+          <div id="strengthBar" class="bar-fill"></div>
+        </div>
+        <p>
+          Rating: <strong id="strengthLabel"></strong>
+          (Score: <span id="scoreText"></span> / 100)
+        </p>
+      </div>
+
+      <!-- Checklist -->
+      <div class="card">
+        <h2>Checklist</h2>
+        <ul id="checklist"></ul>
+      </div>
+
+      <!-- Entropy -->
+      <div class="card">
+        <h2>Password Entropy</h2>
+        <p>Estimated entropy: <strong id="entropyValue"></strong> bits</p>
+        <p>Character pool size (R): <span id="poolValue"></span> &nbsp;|&nbsp; Length (L): <span id="lengthValue"></span></p>
+        <p class="small-text">
+          <strong>What is entropy?</strong> Entropy is a measure of how unpredictable a password is.
+          More bits means more possible combinations an attacker would have to try.
+          Formula used: <code>Entropy = L &times; log2(R)</code>
+        </p>
+        <p class="small-text">
+          Note: This is only an approximation. It assumes every character is chosen randomly,
+          which is not true for most human-made passwords, so it does not guarantee real-world security.
+        </p>
+      </div>
+
+      <!-- Cracking time -->
+      <div class="card">
+        <h2>Estimated Cracking Time</h2>
+        <p>Time to guess (brute force): <strong id="crackTime"></strong></p>
+        <p class="small-text">
+          Assumed guessing speed: 10 billion guesses per second (hypothetical).
+        </p>
+        <p class="small-text">
+          Note: This is only a theoretical estimate. Real cracking time depends on the hashing
+          algorithm used by the website, the attacker's hardware, password patterns, dictionary
+          attacks and other factors. This tool cannot predict the exact time to crack a password.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- ===== Information sections ===== -->
+    <section class="card">
+      <h2>What Makes a Password Strong?</h2>
+      <ul class="info-list">
+        <li>Long: at least 12 characters (longer is better).</li>
+        <li>Mixed: uppercase, lowercase, numbers and special characters.</li>
+        <li>Unpredictable: no sequences like <code>abc</code>, <code>123</code> or <code>qwerty</code>.</li>
+        <li>Unique: not a common password and not used on other websites.</li>
+        <li>No personal info such as your name or date of birth.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Cybersecurity Tips</h2>
+      <ul class="info-list">
+        <li>Use a different password for every account.</li>
+        <li>Use a password manager to store your passwords safely.</li>
+        <li>Turn on two-factor authentication (2FA) wherever possible.</li>
+        <li>A passphrase of 4 or more random words is easy to remember and hard to guess.</li>
+        <li>Never share your password through email, chat or phone calls.</li>
+      </ul>
+    </section>
+
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
